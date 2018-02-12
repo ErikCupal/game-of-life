@@ -1,7 +1,6 @@
 module Main where
 
 import Control.Concurrent (threadDelay)
-import Control.Monad (forever)
 import Data.Foldable (toList)
 import Data.List (intercalate)
 import qualified Data.Sequence as Seq
