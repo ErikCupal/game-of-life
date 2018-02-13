@@ -5,7 +5,7 @@ import Data.Foldable (toList)
 import Data.List (intercalate)
 import qualified Data.Sequence as Seq
 import Data.Sequence (Seq, fromList, mapWithIndex)
-import System.IO (IOMode(..), getLine, hGetContents, openFile)
+import System.IO (IOMode(..), getLine, hGetContents, openFile, hFlush, stdout, hClose)
 
 type Board = Seq Row
 
@@ -21,11 +21,13 @@ type Position = (Int, Int)
 main :: IO ()
 main = do
   putStr "Enter path of file with pattern: "
+  hFlush stdout
   filePath <- getLine
   file <- openFile filePath ReadMode
   content <- hGetContents file
   let board = parseBoard content
   printWorldLoop board 1
+  hClose file
 
 printWorldLoop :: Board -> Int -> IO ()
 printWorldLoop board generation = do
